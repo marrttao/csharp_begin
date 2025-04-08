@@ -20,4 +20,8 @@
         <Using Include="System.Threading.Tasks"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\csharp_begin\csharp_begin.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -1,26 +1,34 @@
-﻿namespace tests;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using csharp_start;
+using System;
 
-[TestClass]
-public class Test1 : PageTest
+namespace tests
 {
-    [TestMethod]
-    public async Task HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage()
+    [TestClass]
+    public class Test1
     {
-        await Page.GotoAsync("https://playwright.dev");
+        [TestMethod]
+        public void ParseTwoNumbers_ValidInput_ReturnsCorrectArray()
+        {
+            Program p = new Program();
+            int[] result = p.ParseTwoNumbers("10", "20");
 
-        // Expect a title "to contain" a substring.
-        await Expect(Page).ToHaveTitleAsync(new Regex("Playwright"));
+            Assert.AreEqual(10, result[0]);
+            Assert.AreEqual(20, result[1]);
+        }
 
-        // create a locator
-        var getStarted = Page.Locator("text=Get Started");
+        [TestMethod]
+        public void ParseTwoNumbers_InvalidInput_ThrowsFormatException()
+        {
+            Program p = new Program();
+            Assert.ThrowsException<FormatException>(() => p.ParseTwoNumbers("abc", "20"));
+        }
 
-        // Expect an attribute "to be strictly equal" to the value.
-        await Expect(getStarted).ToHaveAttributeAsync("href", "/docs/intro");
-
-        // Click the get started link.
-        await getStarted.ClickAsync();
-
-        // Expects the URL to contain intro.
-        await Expect(Page).ToHaveURLAsync(new Regex(".*intro"));
+        [TestMethod]
+        public void ParseTwoNumbers_EmptyInput_ThrowsFormatException()
+        {
+            Program p = new Program();
+            Assert.ThrowsException<FormatException>(() => p.ParseTwoNumbers("", ""));
+        }
     }
 }
