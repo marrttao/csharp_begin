@@ -2,34 +2,53 @@
 {
     public class Program
     {
-        public int[] ParseTwoNumbers(string inputA, string inputB)
+        public char[] getNumbers()
         {
-            if (!int.TryParse(inputA, out int a))
-                throw new FormatException("Invalid input for first number");
-
-            if (!int.TryParse(inputB, out int b))
-                throw new FormatException("Invalid input for second number");
-
-            return new int[] { a, b };
+            char[] number = new char[6];
+            for (int i = 0; i < number.Length; i++)
+            {
+                while (true)
+                {
+                    Console.WriteLine("Enter digit: ");
+                    string input = Console.ReadLine();
+                    if (input.Length == 1 && char.IsDigit(input[0]))
+                    {
+                        number[i] = input[0];
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Please enter a single digit between 0 and 9.");
+                    }
+                }
+            }
+            return number;
         }
 
-        public int Percentage(int total, int percent)
+        public void swap(int a, int b, char[] number)
         {
-            return (total * percent) / 100;
+            char temp = number[b];
+            number[b] = number[a];
+            number[a] = temp;
+            string swappedNumber = new string(number);
+            Console.WriteLine("Swapped number: " + swappedNumber);
+        }
+
+
+        public char[] SwapDigits(int a, int b, char[] number)
+        {
+            char[] copy = (char[])number.Clone();
+            char temp = copy[b];
+            copy[b] = copy[a];
+            copy[a] = temp;
+            return copy;
         }
 
         public static void Main(string[] args)
         {
-            Console.WriteLine("Enter First Number:");
-            string inputA = Console.ReadLine();
-
-            Console.WriteLine("Enter Second Number:");
-            string inputB = Console.ReadLine();
-
-            Program p = new Program();
-            int[] arr = p.ParseTwoNumbers(inputA, inputB);
-
-            Console.WriteLine("The percentage " + arr[1] + " from " + arr[0] + " is " + p.Percentage(arr[0], arr[1]));
+            Program program = new Program();
+            char[] number = program.getNumbers();
+            program.swap(0, 5, number);
         }
     }
 }
