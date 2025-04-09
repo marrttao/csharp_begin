@@ -2,34 +2,43 @@
 {
     public class Program
     {
-        public int[] ParseTwoNumbers(string inputA, string inputB)
+        public string GetDate()
         {
-            if (!int.TryParse(inputA, out int a))
-                throw new FormatException("Invalid input for first number");
-
-            if (!int.TryParse(inputB, out int b))
-                throw new FormatException("Invalid input for second number");
-
-            return new int[] { a, b };
+            Console.WriteLine("Enter date in format dd.MM.yyyy");
+            string date = Console.ReadLine();
+            return date;
         }
 
-        public int Percentage(int total, int percent)
+        public string DateToDayOfWeek(string date)
         {
-            return (total * percent) / 100;
+            DateTime dt = DateTime.ParseExact(date, "dd.MM.yyyy", null);
+            string dayOfWeek = dt.DayOfWeek.ToString();
+            return dayOfWeek;
+        }
+
+        public string DateToSeason(string date)
+        {
+            DateTime dt = DateTime.ParseExact(date, "dd.MM.yyyy", null);
+            string season = "";
+            if (dt.Month == 12 || dt.Month == 1 || dt.Month == 2)
+                season = "Winter";
+            else if (dt.Month >= 3 && dt.Month <= 5)
+                season = "Spring";
+            else if (dt.Month >= 6 && dt.Month <= 8)
+                season = "Summer";
+            else
+                season = "Autumn";
+            return season;
         }
 
         public static void Main(string[] args)
         {
-            Console.WriteLine("Enter First Number:");
-            string inputA = Console.ReadLine();
-
-            Console.WriteLine("Enter Second Number:");
-            string inputB = Console.ReadLine();
-
-            Program p = new Program();
-            int[] arr = p.ParseTwoNumbers(inputA, inputB);
-
-            Console.WriteLine("The percentage " + arr[1] + " from " + arr[0] + " is " + p.Percentage(arr[0], arr[1]));
+            Program program = new Program();
+            string date = program.GetDate();
+            string dayOfWeek = program.DateToDayOfWeek(date);
+            Console.WriteLine($"Day of the week: {dayOfWeek}");
+            string season = program.DateToSeason(date);
+            Console.WriteLine($"Season: {season}");
         }
     }
 }

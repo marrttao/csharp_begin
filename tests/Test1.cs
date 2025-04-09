@@ -1,34 +1,63 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp_start;
-using System;
 
-namespace tests
+namespace csharp_start_tests
 {
     [TestClass]
-    public class Test1
+    public class ProgramTests
     {
         [TestMethod]
-        public void ParseTwoNumbers_ValidInput_ReturnsCorrectArray()
+        public void DateToDayOfWeek_KnownDate_ReturnsCorrectDay()
         {
-            Program p = new Program();
-            int[] result = p.ParseTwoNumbers("10", "20");
+            // Arrange
+            Program program = new Program();
+            string input = "09.04.2025"; // Среда (Wednesday)
 
-            Assert.AreEqual(10, result[0]);
-            Assert.AreEqual(20, result[1]);
+            // Act
+            string result = program.DateToDayOfWeek(input);
+
+            // Assert
+            Assert.AreEqual("Wednesday", result);
         }
 
         [TestMethod]
-        public void ParseTwoNumbers_InvalidInput_ThrowsFormatException()
+        public void DateToSeason_WinterDate_ReturnsWinter()
         {
-            Program p = new Program();
-            Assert.ThrowsException<FormatException>(() => p.ParseTwoNumbers("abc", "20"));
+            Program program = new Program();
+            string result = program.DateToSeason("15.01.2023");
+            Assert.AreEqual("Winter", result);
         }
 
         [TestMethod]
-        public void ParseTwoNumbers_EmptyInput_ThrowsFormatException()
+        public void DateToSeason_SpringDate_ReturnsSpring()
         {
-            Program p = new Program();
-            Assert.ThrowsException<FormatException>(() => p.ParseTwoNumbers("", ""));
+            Program program = new Program();
+            string result = program.DateToSeason("10.03.2022");
+            Assert.AreEqual("Spring", result);
+        }
+
+        [TestMethod]
+        public void DateToSeason_SummerDate_ReturnsSummer()
+        {
+            Program program = new Program();
+            string result = program.DateToSeason("01.08.2020");
+            Assert.AreEqual("Summer", result);
+        }
+
+        [TestMethod]
+        public void DateToSeason_AutumnDate_ReturnsAutumn()
+        {
+            Program program = new Program();
+            string result = program.DateToSeason("30.10.2019");
+            Assert.AreEqual("Autumn", result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void DateToSeason_InvalidFormat_ThrowsFormatException()
+        {
+            Program program = new Program();
+            program.DateToSeason("2024-12-01"); // неправильный формат
         }
     }
 }
