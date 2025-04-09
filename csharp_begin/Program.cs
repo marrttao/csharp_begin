@@ -2,43 +2,35 @@
 {
     public class Program
     {
-        public string GetDate()
+        public bool IsArmstrong(int number)
         {
-            Console.WriteLine("Enter date in format dd.MM.yyyy");
-            string date = Console.ReadLine();
-            return date;
-        }
+            int sum = 0;
+            int digits = number.ToString().Length;
+            int temp = number;
 
-        public string DateToDayOfWeek(string date)
-        {
-            DateTime dt = DateTime.ParseExact(date, "dd.MM.yyyy", null);
-            string dayOfWeek = dt.DayOfWeek.ToString();
-            return dayOfWeek;
-        }
+            while (temp > 0)
+            {
+                int digit = temp % 10;
+                sum += (int)Math.Pow(digit, digits);
+                temp /= 10;
+            }
 
-        public string DateToSeason(string date)
-        {
-            DateTime dt = DateTime.ParseExact(date, "dd.MM.yyyy", null);
-            string season = "";
-            if (dt.Month == 12 || dt.Month == 1 || dt.Month == 2)
-                season = "Winter";
-            else if (dt.Month >= 3 && dt.Month <= 5)
-                season = "Spring";
-            else if (dt.Month >= 6 && dt.Month <= 8)
-                season = "Summer";
-            else
-                season = "Autumn";
-            return season;
+            return sum == number;
         }
 
         public static void Main(string[] args)
         {
             Program program = new Program();
-            string date = program.GetDate();
-            string dayOfWeek = program.DateToDayOfWeek(date);
-            Console.WriteLine($"Day of the week: {dayOfWeek}");
-            string season = program.DateToSeason(date);
-            Console.WriteLine($"Season: {season}");
+            Console.WriteLine("Enter a number: ");
+            int number = int.Parse(Console.ReadLine());
+            if (program.IsArmstrong(number))
+            {
+                Console.WriteLine($"{number} is an Armstrong number.");
+            }
+            else
+            {
+                Console.WriteLine($"{number} is not an Armstrong number.");
+            }
         }
     }
 }
