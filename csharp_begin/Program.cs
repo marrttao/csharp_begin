@@ -2,43 +2,48 @@
 {
     public class Program
     {
-        public string GetDate()
+        public List<int> GetEvenNumbersInRange(int start, int end)
         {
-            Console.WriteLine("Enter date in format dd.MM.yyyy");
-            string date = Console.ReadLine();
-            return date;
-        }
-
-        public string DateToDayOfWeek(string date)
-        {
-            DateTime dt = DateTime.ParseExact(date, "dd.MM.yyyy", null);
-            string dayOfWeek = dt.DayOfWeek.ToString();
-            return dayOfWeek;
-        }
-
-        public string DateToSeason(string date)
-        {
-            DateTime dt = DateTime.ParseExact(date, "dd.MM.yyyy", null);
-            string season = "";
-            if (dt.Month == 12 || dt.Month == 1 || dt.Month == 2)
-                season = "Winter";
-            else if (dt.Month >= 3 && dt.Month <= 5)
-                season = "Spring";
-            else if (dt.Month >= 6 && dt.Month <= 8)
-                season = "Summer";
+            List<int> result = new List<int>();
+            if (start > end)
+            {
+                for (int i = end; i <= start; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        result.Add(i);
+                    }
+                }
+            }
             else
-                season = "Autumn";
-            return season;
+            {
+                for (int i = start; i <= end; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        result.Add(i);
+                    }
+                }
+            }
+            return result;
         }
-
+       
         public static void Main(string[] args)
         {
             Program program = new Program();
-            string date = program.GetDate();
-            string dayOfWeek = program.DateToDayOfWeek(date);
-            Console.WriteLine($"Day of the week: {dayOfWeek}");
-            string season = program.DateToSeason(date);
-            Console.WriteLine($"Season: {season}");
+            int start, end;
+            Console.WriteLine("Enter the start of the range:");
+            start = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the end of the range:");
+            end = int.Parse(Console.ReadLine());
+            List<int> evenNumbers = program.GetEvenNumbersInRange(start, end);
+            Console.WriteLine("Even numbers in the range:");
+            foreach (int number in evenNumbers)
+            {
+                Console.WriteLine(number);
+            }
+            
+            
         }
     }
 }

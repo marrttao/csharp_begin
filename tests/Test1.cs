@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp_start;
+using System.Collections.Generic;
 
 namespace csharp_start_tests
 {
@@ -7,57 +8,43 @@ namespace csharp_start_tests
     public class ProgramTests
     {
         [TestMethod]
-        public void DateToDayOfWeek_KnownDate_ReturnsCorrectDay()
+        public void GetEvenNumbersInRange_StartLessThanEnd_ReturnsCorrectList()
         {
-            // Arrange
             Program program = new Program();
-            string input = "09.04.2025"; // Среда (Wednesday)
-
-            // Act
-            string result = program.DateToDayOfWeek(input);
-
-            // Assert
-            Assert.AreEqual("Wednesday", result);
+            List<int> result = program.GetEvenNumbersInRange(1, 10);
+            CollectionAssert.AreEqual(new List<int> { 2, 4, 6, 8, 10 }, result);
         }
 
         [TestMethod]
-        public void DateToSeason_WinterDate_ReturnsWinter()
+        public void GetEvenNumbersInRange_StartGreaterThanEnd_ReturnsCorrectList()
         {
             Program program = new Program();
-            string result = program.DateToSeason("15.01.2023");
-            Assert.AreEqual("Winter", result);
+            List<int> result = program.GetEvenNumbersInRange(10, 1);
+            CollectionAssert.AreEqual(new List<int> { 2, 4, 6, 8, 10 }, result);
         }
 
         [TestMethod]
-        public void DateToSeason_SpringDate_ReturnsSpring()
+        public void GetEvenNumbersInRange_OnlyOneEvenNumber()
         {
             Program program = new Program();
-            string result = program.DateToSeason("10.03.2022");
-            Assert.AreEqual("Spring", result);
+            List<int> result = program.GetEvenNumbersInRange(3, 4);
+            CollectionAssert.AreEqual(new List<int> { 4 }, result);
         }
 
         [TestMethod]
-        public void DateToSeason_SummerDate_ReturnsSummer()
+        public void GetEvenNumbersInRange_NoEvenNumbers()
         {
             Program program = new Program();
-            string result = program.DateToSeason("01.08.2020");
-            Assert.AreEqual("Summer", result);
+            List<int> result = program.GetEvenNumbersInRange(1, 1); // 1 is odd
+            CollectionAssert.AreEqual(new List<int> { }, result);
         }
 
         [TestMethod]
-        public void DateToSeason_AutumnDate_ReturnsAutumn()
+        public void GetEvenNumbersInRange_SameStartAndEnd_EvenNumber()
         {
             Program program = new Program();
-            string result = program.DateToSeason("30.10.2019");
-            Assert.AreEqual("Autumn", result);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(FormatException))]
-        public void DateToSeason_InvalidFormat_ThrowsFormatException()
-        {
-            Program program = new Program();
-            program.DateToSeason("2024-12-01"); // неправильный формат
+            List<int> result = program.GetEvenNumbersInRange(2, 2);
+            CollectionAssert.AreEqual(new List<int> { 2 }, result);
         }
     }
 }
