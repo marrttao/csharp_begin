@@ -7,57 +7,51 @@ namespace csharp_start_tests
     public class ProgramTests
     {
         [TestMethod]
-        public void DateToDayOfWeek_KnownDate_ReturnsCorrectDay()
+        public void FToC_32F_Returns0C()
         {
-            // Arrange
             Program program = new Program();
-            string input = "09.04.2025"; // Среда (Wednesday)
-
-            // Act
-            string result = program.DateToDayOfWeek(input);
-
-            // Assert
-            Assert.AreEqual("Wednesday", result);
+            int result = program.FToC(32);
+            Assert.AreEqual(0, result);
         }
 
         [TestMethod]
-        public void DateToSeason_WinterDate_ReturnsWinter()
+        public void FToC_212F_Returns100C()
         {
             Program program = new Program();
-            string result = program.DateToSeason("15.01.2023");
-            Assert.AreEqual("Winter", result);
+            int result = program.FToC(212);
+            Assert.AreEqual(100, result);
         }
 
         [TestMethod]
-        public void DateToSeason_SpringDate_ReturnsSpring()
+        public void CToF_0C_Returns32F()
         {
             Program program = new Program();
-            string result = program.DateToSeason("10.03.2022");
-            Assert.AreEqual("Spring", result);
+            int result = program.CToF(0);
+            Assert.AreEqual(32, result);
         }
 
         [TestMethod]
-        public void DateToSeason_SummerDate_ReturnsSummer()
+        public void CToF_100C_Returns212F()
         {
             Program program = new Program();
-            string result = program.DateToSeason("01.08.2020");
-            Assert.AreEqual("Summer", result);
+            int result = program.CToF(100);
+            Assert.AreEqual(212, result);
         }
 
         [TestMethod]
-        public void DateToSeason_AutumnDate_ReturnsAutumn()
+        public void FToC_NegativeFahrenheit_ReturnsExpectedCelsius()
         {
             Program program = new Program();
-            string result = program.DateToSeason("30.10.2019");
-            Assert.AreEqual("Autumn", result);
+            int result = program.FToC(-40); // -40°F = -40°C
+            Assert.AreEqual(-40, result);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FormatException))]
-        public void DateToSeason_InvalidFormat_ThrowsFormatException()
+        public void CToF_NegativeCelsius_ReturnsExpectedFahrenheit()
         {
             Program program = new Program();
-            program.DateToSeason("2024-12-01"); // неправильный формат
+            int result = program.CToF(-40); // -40°C = -40°F
+            Assert.AreEqual(-40, result);
         }
     }
 }

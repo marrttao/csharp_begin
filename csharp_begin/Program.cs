@@ -2,43 +2,24 @@
 {
     public class Program
     {
-        public string GetDate()
+        public int FToC(int f)
         {
-            Console.WriteLine("Enter date in format dd.MM.yyyy");
-            string date = Console.ReadLine();
-            return date;
+            return (int)((f - 32) * 5 / 9);
         }
-
-        public string DateToDayOfWeek(string date)
+        public int CToF(int c)
         {
-            DateTime dt = DateTime.ParseExact(date, "dd.MM.yyyy", null);
-            string dayOfWeek = dt.DayOfWeek.ToString();
-            return dayOfWeek;
+            return (int)(c * 9 / 5 + 32);
         }
-
-        public string DateToSeason(string date)
-        {
-            DateTime dt = DateTime.ParseExact(date, "dd.MM.yyyy", null);
-            string season = "";
-            if (dt.Month == 12 || dt.Month == 1 || dt.Month == 2)
-                season = "Winter";
-            else if (dt.Month >= 3 && dt.Month <= 5)
-                season = "Spring";
-            else if (dt.Month >= 6 && dt.Month <= 8)
-                season = "Summer";
-            else
-                season = "Autumn";
-            return season;
-        }
-
         public static void Main(string[] args)
         {
             Program program = new Program();
-            string date = program.GetDate();
-            string dayOfWeek = program.DateToDayOfWeek(date);
-            Console.WriteLine($"Day of the week: {dayOfWeek}");
-            string season = program.DateToSeason(date);
-            Console.WriteLine($"Season: {season}");
+            Console.WriteLine("Write F: ");
+            int f = int.Parse(Console.ReadLine());
+            Console.WriteLine($"F in C: {program.FToC(f)}");
+            Console.WriteLine("Write C:");
+            int c = int.Parse(Console.ReadLine());
+            Console.WriteLine($"C in F: {program.CToF(c)}");
+              
         }
     }
 }
