@@ -2,43 +2,35 @@
 {
     public class Program
     {
-        public string GetDate()
+       
+        public bool IsPerfectNumber(int number)
         {
-            Console.WriteLine("Enter date in format dd.MM.yyyy");
-            string date = Console.ReadLine();
-            return date;
-        }
-
-        public string DateToDayOfWeek(string date)
-        {
-            DateTime dt = DateTime.ParseExact(date, "dd.MM.yyyy", null);
-            string dayOfWeek = dt.DayOfWeek.ToString();
-            return dayOfWeek;
-        }
-
-        public string DateToSeason(string date)
-        {
-            DateTime dt = DateTime.ParseExact(date, "dd.MM.yyyy", null);
-            string season = "";
-            if (dt.Month == 12 || dt.Month == 1 || dt.Month == 2)
-                season = "Winter";
-            else if (dt.Month >= 3 && dt.Month <= 5)
-                season = "Spring";
-            else if (dt.Month >= 6 && dt.Month <= 8)
-                season = "Summer";
-            else
-                season = "Autumn";
-            return season;
+            int sum = 0;
+            for (int i = 1; i <= number / 2; i++)
+            {
+                if (number % i == 0)
+                {
+                    sum += i;
+                }
+            }
+            return sum == number;
         }
 
         public static void Main(string[] args)
         {
             Program program = new Program();
-            string date = program.GetDate();
-            string dayOfWeek = program.DateToDayOfWeek(date);
-            Console.WriteLine($"Day of the week: {dayOfWeek}");
-            string season = program.DateToSeason(date);
-            Console.WriteLine($"Season: {season}");
+            int number;
+            Console.WriteLine("Enter number");
+            number = int.Parse(Console.ReadLine());
+            if (program.IsPerfectNumber(number))
+            {
+                Console.WriteLine($"{number} is a perfect number.");
+            }
+            else
+            {
+                Console.WriteLine($"{number} is not a perfect number.");
+            }
         }
+
     }
 }

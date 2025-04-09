@@ -7,57 +7,55 @@ namespace csharp_start_tests
     public class ProgramTests
     {
         [TestMethod]
-        public void DateToDayOfWeek_KnownDate_ReturnsCorrectDay()
+        public void IsPerfectNumber_6_ReturnsTrue()
         {
             // Arrange
             Program program = new Program();
-            string input = "09.04.2025"; // Среда (Wednesday)
 
             // Act
-            string result = program.DateToDayOfWeek(input);
+            bool result = program.IsPerfectNumber(6);
 
             // Assert
-            Assert.AreEqual("Wednesday", result);
+            Assert.IsTrue(result); // 6 — совершенное число, делители: 1, 2, 3 → 1 + 2 + 3 = 6
         }
 
         [TestMethod]
-        public void DateToSeason_WinterDate_ReturnsWinter()
+        public void IsPerfectNumber_28_ReturnsTrue()
         {
+            // Arrange
             Program program = new Program();
-            string result = program.DateToSeason("15.01.2023");
-            Assert.AreEqual("Winter", result);
+
+            // Act
+            bool result = program.IsPerfectNumber(28);
+
+            // Assert
+            Assert.IsTrue(result); // 28 — совершенное число, делители: 1, 2, 4, 7, 14 → 1 + 2 + 4 + 7 + 14 = 28
         }
 
         [TestMethod]
-        public void DateToSeason_SpringDate_ReturnsSpring()
+        public void IsPerfectNumber_12_ReturnsFalse()
         {
+            // Arrange
             Program program = new Program();
-            string result = program.DateToSeason("10.03.2022");
-            Assert.AreEqual("Spring", result);
+
+            // Act
+            bool result = program.IsPerfectNumber(12);
+
+            // Assert
+            Assert.IsFalse(result); // 12 не совершенное число
         }
 
         [TestMethod]
-        public void DateToSeason_SummerDate_ReturnsSummer()
+        public void IsPerfectNumber_1_ReturnsFalse()
         {
+            // Arrange
             Program program = new Program();
-            string result = program.DateToSeason("01.08.2020");
-            Assert.AreEqual("Summer", result);
-        }
 
-        [TestMethod]
-        public void DateToSeason_AutumnDate_ReturnsAutumn()
-        {
-            Program program = new Program();
-            string result = program.DateToSeason("30.10.2019");
-            Assert.AreEqual("Autumn", result);
-        }
+            // Act
+            bool result = program.IsPerfectNumber(1);
 
-        [TestMethod]
-        [ExpectedException(typeof(FormatException))]
-        public void DateToSeason_InvalidFormat_ThrowsFormatException()
-        {
-            Program program = new Program();
-            program.DateToSeason("2024-12-01"); // неправильный формат
+            // Assert
+            Assert.IsFalse(result); // 1 не совершенное число
         }
     }
 }
