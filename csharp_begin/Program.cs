@@ -2,7 +2,6 @@
 {
     public class Program
     {
-        // Сделаем метод public для тестов
         public static int connect_inputs(string[] arr)
         {
             string result = string.Empty;
