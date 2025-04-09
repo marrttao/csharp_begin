@@ -22,31 +22,24 @@
             }
         }
 
-        public void CheckNumber(int user)
+        public string GetFizzBuzzResult(int user)
         {
             if (user % 3 == 0 && user % 5 == 0)
-            {
-                Console.WriteLine("FizzBuzz");
-            }
+                return "FizzBuzz";
             else if (user % 3 == 0)
-            {
-                Console.WriteLine("Fizz");
-            }
+                return "Fizz";
             else if (user % 5 == 0)
-            {
-                Console.WriteLine("Buzz");
-            }
+                return "Buzz";
             else
-            {
-                Console.WriteLine(user);
-            }
+                return user.ToString();
         }
+
 
         public static void Main(string[] args)
         {
             Program p = new Program();
             int user = p.GetUserInput();
-            p.CheckNumber(user);
+            p.GetFizzBuzzResult(user);
         }
     }
 }
